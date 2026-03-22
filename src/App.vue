@@ -50,6 +50,7 @@ main {
 
 img {
   display: block;
+  min-height: 100svh;
   width: 100%;
   max-height: 100svh;
   object-fit: contain;
