@@ -68,8 +68,9 @@ function scrollToRequestedPage() {
     const target = document.querySelector(pageHash)
     if (!target) return
 
+    const headerOffset = document.querySelector('.reader-header')?.getBoundingClientRect().height || 112
     window.scrollTo({
-      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 24),
+      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - headerOffset),
       behavior: 'auto',
     })
   }, 80)
