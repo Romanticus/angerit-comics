@@ -65,7 +65,13 @@ function scrollToRequestedPage() {
   if (!pageHash) return
 
   window.setTimeout(() => {
-    document.querySelector(pageHash)?.scrollIntoView({ block: 'start' })
+    const target = document.querySelector(pageHash)
+    if (!target) return
+
+    window.scrollTo({
+      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 24),
+      behavior: 'auto',
+    })
   }, 80)
 }
 

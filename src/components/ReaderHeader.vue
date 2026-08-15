@@ -54,7 +54,14 @@ function handleResumeClick(event, progress) {
   if (window.location.hash !== targetHash) return
 
   event.preventDefault()
-  document.querySelector(`#page-${progress.pageOrder}`)?.scrollIntoView({ block: 'start' })
+  event.stopPropagation()
+  const target = document.getElementById(`page-${progress.pageOrder}`)
+  if (!target) return
+
+  window.scrollTo({
+    top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 24),
+    behavior: 'smooth',
+  })
 }
 
 onMounted(() => {
