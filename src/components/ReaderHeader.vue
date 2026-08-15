@@ -57,7 +57,8 @@ function cancelForgetProgress() {
   showResetConfirm.value = false
 }
 
-function handleResumeClick(progress) {
+function handleResumeClick(progress, event) {
+  event.currentTarget.blur()
   const targetHash = `#/part/${progress.partId}#page-${progress.pageOrder}`
   if (window.location.hash !== targetHash) {
     router.push(`/part/${progress.partId}#page-${progress.pageOrder}`)
@@ -100,7 +101,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
       <button
         class="reader-resume__link"
         type="button"
-        @click="handleResumeClick(resumeProgress)"
+          @click="handleResumeClick(resumeProgress, $event)"
       >
         К странице {{ resumeProgress.pageOrder }}
       </button>
