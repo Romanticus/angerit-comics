@@ -47,7 +47,8 @@ function observeReadingProgress() {
         const pageOrder = Number(entry.target.dataset.pageOrder)
         if (pageOrder === part.value.endPage) {
           completeReadingPart(part.value.id)
-        } else {
+        } else if (pageOrder > part.value.startPage) {
+          // Opening a new part on page one must not replace an existing resume point.
           saveReadingProgress(part.value.id, pageOrder)
         }
         refreshResumeProgress()
