@@ -264,6 +264,9 @@
   position: sticky;
   top: 0;
   z-index: 30;
+}
+
+.reader-header__inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   grid-template-areas:
@@ -274,11 +277,10 @@
   padding: 12px 0 16px;
   background: var(--background);
   border-bottom: 1px solid var(--border-muted);
-  pointer-events: auto;
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reader-header--hidden {
+.reader-header--hidden .reader-header__inner {
   transform: translateY(calc(-100% - 1px));
   pointer-events: none;
 }
@@ -701,7 +703,7 @@
     padding-inline: 12px;
   }
 
-  .reader-header {
+  .reader-header__inner {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       'back kicker'
