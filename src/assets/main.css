@@ -412,12 +412,16 @@
   min-height: 58px;
   border: 1px solid var(--border);
   background: var(--background);
-  transform: translateX(calc(100% - 44px));
+  transform: translateX(calc(100% - 28px));
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .resume-prompt--open {
   transform: translateX(0);
+}
+
+.resume-prompt:not(.resume-prompt--open) .resume-prompt__toggle {
+  flex-basis: 28px;
 }
 
 .resume-prompt__toggle {
