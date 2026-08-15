@@ -37,10 +37,15 @@ function updateVisibility() {
 
   if (currentScrollY < 24) {
     isHidden.value = false
-  } else {
+  } else if (currentScrollY > 96) {
     isHidden.value = delta > 0
   }
   previousScrollY = currentScrollY
+}
+
+function revealHeader() {
+  isHidden.value = false
+  previousScrollY = window.scrollY
 }
 
 function forgetProgress() {
@@ -117,4 +122,13 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
       </div>
     </div>
   </header>
+  <button
+    class="reader-header-reveal"
+    :class="{ 'reader-header-reveal--visible': isHidden }"
+    type="button"
+    aria-label="Показать хедер"
+    @click="revealHeader"
+  >
+    ↑
+  </button>
 </template>

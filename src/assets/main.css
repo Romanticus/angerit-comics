@@ -283,6 +283,39 @@
   pointer-events: none;
 }
 
+.reader-header-reveal {
+  position: fixed;
+  top: 10px;
+  right: 16px;
+  z-index: 31;
+  display: grid;
+  width: 36px;
+  height: 32px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--text);
+  background: var(--text);
+  color: var(--background);
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.1rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-12px);
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+
+.reader-header-reveal--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.reader-header-reveal:hover,
+.reader-header-reveal:focus-visible {
+  background: var(--text-bright);
+}
+
 .reader-home-link {
   grid-area: back;
   color: var(--text);
