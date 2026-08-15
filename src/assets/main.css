@@ -576,7 +576,12 @@
 }
 
 .reader-resume__link {
+  padding: 0;
+  border: 0;
+  background: transparent;
   color: var(--text-bright);
+  font: inherit;
+  cursor: pointer;
   text-underline-offset: 4px;
 }
 

@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 
 import { clearReadingProgress } from '../utils/readingProgress.js'
 
@@ -16,6 +16,7 @@ defineProps({
 })
 
 const emit = defineEmits(['progress-reset'])
+const router = useRouter()
 
 const header = ref(null)
 const isHidden = ref(false)
@@ -49,19 +50,25 @@ function cancelForgetProgress() {
   showResetConfirm.value = false
 }
 
-function handleResumeClick(event, progress) {
+function handleResumeClick(progress) {
   const targetHash = `#/part/${progress.partId}#page-${progress.pageOrder}`
-  if (window.location.hash !== targetHash) return
+  if (window.location.hash !== targetHash) {
+    router.push(`/part/${progress.partId}#page-${progress.pageOrder}`)
+    return
+  }
 
-  event.preventDefault()
-  event.stopPropagation()
   const target = document.getElementById(`page-${progress.pageOrder}`)
   if (!target) return
 
-  window.scrollTo({
-    top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 24),
-    behavior: 'smooth',
-  })
+  const scrollToTarget = () => {
+    window.scrollTo({
+      top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 24),
+      behavior: 'auto',
+    })
+  }
+
+  scrollToTarget()
+  window.requestAnimationFrame(scrollToTarget)
 }
 
 onMounted(() => {
@@ -77,13 +84,13 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
     <RouterLink class="reader-home-link" to="/">← На главную</RouterLink>
     <p class="reader-kicker">No, I'm not a Human</p>
     <div v-if="resumeProgress" class="reader-resume">
-      <RouterLink
+      <button
         class="reader-resume__link"
-        :to="`/part/${resumeProgress.partId}#page-${resumeProgress.pageOrder}`"
-        @click="handleResumeClick($event, resumeProgress)"
+        type="button"
+        @click="handleResumeClick(resumeProgress)"
       >
         К странице {{ resumeProgress.pageOrder }}
-      </RouterLink>
+      </button>
       <button class="reader-resume__forget" type="button" @click="forgetProgress">
         Забыть прогресс
       </button>
