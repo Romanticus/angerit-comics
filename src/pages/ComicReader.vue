@@ -84,6 +84,14 @@ watch(
   },
 )
 
+watch(
+  () => route.fullPath,
+  async () => {
+    await nextTick()
+    scrollToRequestedPage()
+  },
+)
+
 onBeforeUnmount(() => progressObserver?.disconnect())
 
 function clearResumeProgress() {
@@ -111,8 +119,8 @@ function clearResumeProgress() {
         <img
           :ref="(element) => markLoadedIfComplete(element, page.order)"
           :src="page.url"
-          width="2894"
-          height="4093"
+          :width="page.width"
+          :height="page.height"
           :alt="`Страница ${page.order}`"
           :loading="index === 0 ? 'eager' : 'lazy'"
           :fetchpriority="index === 0 ? 'high' : 'auto'"

@@ -49,6 +49,14 @@ function cancelForgetProgress() {
   showResetConfirm.value = false
 }
 
+function handleResumeClick(event, progress) {
+  const targetHash = `#/part/${progress.partId}#page-${progress.pageOrder}`
+  if (window.location.hash !== targetHash) return
+
+  event.preventDefault()
+  document.querySelector(`#page-${progress.pageOrder}`)?.scrollIntoView({ block: 'start' })
+}
+
 onMounted(() => {
   previousScrollY = window.scrollY
   window.addEventListener('scroll', updateVisibility, { passive: true })
@@ -62,7 +70,11 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
     <RouterLink class="reader-home-link" to="/">← На главную</RouterLink>
     <p class="reader-kicker">No, I'm not a Human</p>
     <div v-if="resumeProgress" class="reader-resume">
-      <RouterLink class="reader-resume__link" :to="`/part/${resumeProgress.partId}#page-${resumeProgress.pageOrder}`">
+      <RouterLink
+        class="reader-resume__link"
+        :to="`/part/${resumeProgress.partId}#page-${resumeProgress.pageOrder}`"
+        @click="handleResumeClick($event, resumeProgress)"
+      >
         К странице {{ resumeProgress.pageOrder }}
       </RouterLink>
       <button class="reader-resume__forget" type="button" @click="forgetProgress">
