@@ -11,12 +11,17 @@ import { RouterLink } from 'vue-router'
 import AgeWarning from '../components/AgeWarning.vue'
 import PartCard from '../components/PartCard.vue'
 import ProjectInfo from '../components/ProjectInfo.vue'
+import ResumePrompt from '../components/ResumePrompt.vue'
 import { comicParts } from '../data/comicParts.js'
 import coverUrl from '../assets/images/0.webp'
+import { getLatestUnfinishedProgress } from '../utils/readingProgress.js'
+
+const resumeProgress = getLatestUnfinishedProgress()
 </script>
 
 <template>
   <main class="home-page">
+    <ResumePrompt v-if="resumeProgress" :progress="resumeProgress" />
     <div class="home-frame">
       <section class="hero" aria-labelledby="comic-title">
         <div class="hero-heading">
