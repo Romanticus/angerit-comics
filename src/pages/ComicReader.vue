@@ -50,9 +50,12 @@ function observeReadingProgress() {
 }
 
 function scrollToRequestedPage() {
-  if (!route.hash) return
-  const target = document.querySelector(route.hash)
-  target?.scrollIntoView({ block: 'start' })
+  const pageHash = window.location.hash.match(/(#page-\d+)$/)?.[1]
+  if (!pageHash) return
+
+  window.setTimeout(() => {
+    document.querySelector(pageHash)?.scrollIntoView({ block: 'start' })
+  }, 80)
 }
 
 onMounted(async () => {

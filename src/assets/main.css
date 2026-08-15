@@ -310,6 +310,7 @@
 .comic-page {
   position: relative;
   margin: 0;
+  scroll-margin-top: 24px;
 }
 
 .comic-page + .comic-page {
