@@ -18,7 +18,7 @@
     </div>
     <div>
       <dt>Boosty:</dt>
-      <dd><a href="https://boosty.to/angererit" target="_blank" rel="noopener noreferrer">angererit</a></dd>
+      <dd><a href="https://boosty.to/anger_erit" target="_blank" rel="noopener noreferrer">anger_erit</a></dd>
     </div>
   </dl>
 </template>

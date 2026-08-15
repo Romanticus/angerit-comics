@@ -42,7 +42,7 @@ web
 - Создатель сайта: romantic.
 - Годы проекта: 2025–2026.
 - Telegram художницы: [erafilart](https://t.me/erafilart).
-- Boosty художницы: [angererit](https://boosty.to/angererit).
+- Boosty художницы: [anger_erit](https://boosty.to/anger_erit).
 
 ## Evidence on Hand
 
