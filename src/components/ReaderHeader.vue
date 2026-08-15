@@ -20,18 +20,25 @@ const router = useRouter()
 
 const header = ref(null)
 const isHidden = ref(false)
+const isPointerInside = ref(false)
 const showResetConfirm = ref(false)
 let previousScrollY = 0
 
 function updateVisibility() {
-  if (header.value?.contains(document.activeElement)) return
   const currentScrollY = window.scrollY
+  const delta = currentScrollY - previousScrollY
+
+  if (header.value?.contains(document.activeElement) || isPointerInside.value) {
+    previousScrollY = currentScrollY
+    return
+  }
+
+  if (Math.abs(delta) < 12) return
+
   if (currentScrollY < 24) {
     isHidden.value = false
-  } else if (currentScrollY > previousScrollY + 4) {
-    isHidden.value = true
-  } else if (currentScrollY < previousScrollY - 4) {
-    isHidden.value = false
+  } else {
+    isHidden.value = delta > 0
   }
   previousScrollY = currentScrollY
 }
@@ -80,7 +87,13 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
 </script>
 
 <template>
-  <header ref="header" class="reader-header" :class="{ 'reader-header--hidden': isHidden }">
+  <header
+    ref="header"
+    class="reader-header"
+    :class="{ 'reader-header--hidden': isHidden }"
+    @mouseenter="isPointerInside = true"
+    @mouseleave="isPointerInside = false"
+  >
     <RouterLink class="reader-home-link" to="/">← На главную</RouterLink>
     <p class="reader-kicker">No, I'm not a Human</p>
     <div v-if="resumeProgress" class="reader-resume">
