@@ -6,9 +6,11 @@ FIRST VIEWPORT: Large title and metadata on the left, natural 2:3 cover on the r
 FORM: Approved second generated composition; the sparse catalog-register staging carries into the part index and 18+ note.
 -->
 <script setup>
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
 import AgeWarning from '../components/AgeWarning.vue'
+import ForgetProgressControl from '../components/ForgetProgressControl.vue'
 import PartCard from '../components/PartCard.vue'
 import ProjectInfo from '../components/ProjectInfo.vue'
 import ResumePrompt from '../components/ResumePrompt.vue'
@@ -16,7 +18,11 @@ import { comicParts } from '../data/comicParts.js'
 import coverUrl from '../assets/images/0.webp'
 import { getLatestUnfinishedProgress } from '../utils/readingProgress.js'
 
-const resumeProgress = getLatestUnfinishedProgress()
+const resumeProgress = ref(getLatestUnfinishedProgress())
+
+function clearResumeProgress() {
+  resumeProgress.value = null
+}
 </script>
 
 <template>
@@ -58,6 +64,11 @@ const resumeProgress = getLatestUnfinishedProgress()
           Проект не связан с разработчиками или издателями игры <em>No, I'm not a Human</em>.
           Права на оригинальную игру и её персонажей принадлежат соответствующим правообладателям.
         </p>
+        <ForgetProgressControl
+          v-if="resumeProgress"
+          :progress="resumeProgress"
+          @progress-reset="clearResumeProgress"
+        />
       </footer>
     </div>
   </main>

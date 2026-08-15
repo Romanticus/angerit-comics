@@ -122,7 +122,12 @@ function clearResumeProgress() {
       </figure>
     </section>
 
-    <ReaderFooter :current-id="part.id" :parts="comicParts" />
+    <ReaderFooter
+      :current-id="part.id"
+      :parts="comicParts"
+      :resume-progress="resumeProgress"
+      @progress-reset="clearResumeProgress"
+    />
   </main>
 
   <main v-else class="reader-page reader-page--missing">
