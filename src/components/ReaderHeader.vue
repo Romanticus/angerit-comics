@@ -59,6 +59,8 @@ function cancelForgetProgress() {
 
 function handleResumeClick(progress, event) {
   event.currentTarget.blur()
+  isPointerInside.value = false
+  isHidden.value = true
   const targetHash = `#/part/${progress.partId}#page-${progress.pageOrder}`
   if (window.location.hash !== targetHash) {
     router.push(`/part/${progress.partId}#page-${progress.pageOrder}`)
