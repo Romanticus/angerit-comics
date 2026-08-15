@@ -19,6 +19,9 @@ function writeState(state) {
 
 export function saveReadingProgress(partId, pageOrder) {
   const state = readState()
+  const previous = state.parts[partId]
+  if (previous?.completed || (previous && pageOrder <= previous.pageOrder)) return
+
   state.parts[partId] = {
     pageOrder,
     updatedAt: Date.now(),
