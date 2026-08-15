@@ -1,8 +1,39 @@
-<!-- SEED: established with the user before implementation; re-run $impeccable document once there's code to capture the actual tokens and components. -->
-
 ---
 name: No, I'm not a Human — angererit
 description: Строгий электронный архив русскоязычного фан-комикса.
+colors:
+  primary: "#55dfe2"
+  bright: "#83f5f1"
+  muted: "#348d91"
+  background: "#000000"
+  border: "rgba(85, 223, 226, 0.65)"
+  border-muted: "rgba(85, 223, 226, 0.3)"
+typography:
+  display:
+    fontFamily: "EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive"
+    fontSize: "clamp(3.2rem, 7vw, 6rem)"
+    fontWeight: 400
+    lineHeight: 0.92
+  body:
+    fontFamily: "EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.55
+rounded:
+  hairline: "0"
+spacing:
+  frame: "clamp(24px, 5vw, 64px)"
+  section: "clamp(96px, 13vw, 180px)"
+components:
+  primary-button:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.primary}"
+    rounded: "{rounded.hairline}"
+    height: "64px"
+  part-card:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.primary}"
+    rounded: "{rounded.hairline}"
 ---
 
 # Design System: Angerit Comics
@@ -43,11 +74,13 @@ description: Строгий электронный архив русскоязы
 
 ## Typography
 
-**Display Font:** EL_CCMIKEKUNKEL, sans-serif  
-**Body Font:** EL_CCMIKEKUNKEL, sans-serif  
-**Label Font:** EL_CCMIKEKUNKEL, sans-serif
+**Display Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive  
+**Body Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive  
+**Label Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive
 
 **Character:** Один рукописный голос связывает заголовки, метаданные, навигацию и предупреждения с авторским комиксом. Иерархия создаётся размером, интервалом и регистром, а не сменой гарнитуры или веса.
+
+Файл `public/fonts/EL_CCMIKEKUNKEL.woff2` остаётся поставляемым ассетом: пока его нет в репозитории, браузер использует Comic Sans MS / Segoe Print как локальный fallback.
 
 ### Hierarchy
 
