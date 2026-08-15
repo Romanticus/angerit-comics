@@ -426,6 +426,9 @@
 
 .resume-prompt__toggle {
   flex: 0 0 42px;
+  display: grid;
+  padding: 0;
+  place-items: center;
   border: 1px solid var(--text);
   border-right: 1px solid var(--border-muted);
   background: var(--text);
