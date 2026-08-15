@@ -74,8 +74,8 @@ components:
 
 ## Typography
 
-**Display Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive  
-**Body Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive  
+**Display Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive<br>
+**Body Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive<br>
 **Label Font:** EL_CCMIKEKUNKEL, Comic Sans MS, Segoe Print, cursive
 
 **Character:** Один рукописный голос связывает заголовки, метаданные, навигацию и предупреждения с авторским комиксом. Иерархия создаётся размером, интервалом и регистром, а не сменой гарнитуры или веса.
