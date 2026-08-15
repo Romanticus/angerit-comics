@@ -19,6 +19,7 @@ const emit = defineEmits(['progress-reset'])
 
 const header = ref(null)
 const isHidden = ref(false)
+const showResetConfirm = ref(false)
 let previousScrollY = 0
 
 function updateVisibility() {
@@ -35,8 +36,17 @@ function updateVisibility() {
 }
 
 function forgetProgress() {
+  showResetConfirm.value = true
+}
+
+function confirmForgetProgress() {
   clearReadingProgress()
+  showResetConfirm.value = false
   emit('progress-reset')
+}
+
+function cancelForgetProgress() {
+  showResetConfirm.value = false
 }
 
 onMounted(() => {
@@ -60,5 +70,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
       </button>
     </div>
     <h1>{{ partTitle }}</h1>
+    <div v-if="showResetConfirm" class="reader-reset-dialog" role="dialog" aria-modal="true" aria-labelledby="reset-progress-title">
+      <p id="reset-progress-title">Точно сбросить прогресс?</p>
+      <div class="reader-reset-dialog__actions">
+        <button class="reader-reset-dialog__yes" type="button" @click="confirmForgetProgress">Да</button>
+        <button class="reader-reset-dialog__no" type="button" @click="cancelForgetProgress">Нет</button>
+      </div>
+    </div>
   </header>
 </template>

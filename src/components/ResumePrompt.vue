@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
-import { clearReadingProgress } from '../utils/readingProgress.js'
-
 defineProps({
   progress: {
     type: Object,
@@ -12,16 +10,10 @@ defineProps({
 })
 
 const isOpen = ref(true)
-const isVisible = ref(true)
-
-function forgetProgress() {
-  clearReadingProgress()
-  isVisible.value = false
-}
 </script>
 
 <template>
-  <aside v-if="isVisible" class="resume-prompt" :class="{ 'resume-prompt--open': isOpen }">
+  <aside class="resume-prompt" :class="{ 'resume-prompt--open': isOpen }">
     <button
       class="resume-prompt__toggle"
       type="button"
@@ -41,9 +33,6 @@ function forgetProgress() {
       >
         Продолжить
       </RouterLink>
-      <button class="resume-prompt__forget" type="button" @click="forgetProgress">
-        Забыть прогресс
-      </button>
     </div>
   </aside>
 </template>
