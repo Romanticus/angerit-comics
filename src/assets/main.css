@@ -261,10 +261,13 @@
   top: 0;
   z-index: 5;
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 12px 24px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'back kicker'
+    'title resume';
+  gap: 6px 24px;
   align-items: center;
-  padding: 18px 0 28px;
+  padding: 12px 0 16px;
   background: var(--background);
   border-bottom: 1px solid var(--border-muted);
   transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -275,6 +278,7 @@
 }
 
 .reader-home-link {
+  grid-area: back;
   color: var(--text);
   text-decoration: none;
   font-size: 0.95rem;
@@ -287,24 +291,23 @@
 }
 
 .reader-header .reader-kicker {
-  grid-column: 2;
-  grid-row: 1;
+  grid-area: kicker;
   justify-self: end;
   color: var(--text-muted);
 }
 
 .reader-header h1 {
-  grid-column: 1 / -1;
+  grid-area: title;
   margin: 0;
   color: var(--text-bright);
-  font-size: clamp(2.2rem, 5vw, 4.5rem);
+  font-size: clamp(1.8rem, 4vw, 3.6rem);
   font-weight: 400;
   line-height: 1;
 }
 
 .comic-stack {
   width: 100%;
-  margin: 42px auto 0;
+  margin: 24px auto 0;
 }
 
 .comic-page {
@@ -488,9 +491,8 @@
 }
 
 .reader-resume {
+  grid-area: resume;
   display: grid;
-  grid-column: 2;
-  grid-row: 2;
   gap: 4px;
   justify-items: end;
   text-align: right;
@@ -616,7 +618,12 @@
   }
 
   .reader-header {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'back kicker'
+      'title resume';
+    gap: 6px 12px;
+    padding: 10px 0 14px;
   }
 
   .resume-prompt--open {
@@ -624,16 +631,18 @@
   }
 
   .reader-header .reader-kicker {
-    grid-column: 1;
-    grid-row: auto;
-    justify-self: start;
+    justify-self: end;
+    font-size: 0.8rem;
   }
 
   .reader-resume {
-    grid-column: 1;
-    grid-row: auto;
-    justify-items: start;
-    text-align: left;
+    justify-items: end;
+    max-width: 124px;
+    text-align: right;
+  }
+
+  .reader-header h1 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
   }
 
   .reader-footer {
