@@ -9,7 +9,7 @@ defineProps({
   },
 })
 
-const isOpen = ref(false)
+const isOpen = ref(true)
 </script>
 
 <template>
@@ -25,7 +25,6 @@ const isOpen = ref(false)
     </button>
 
     <div v-if="isOpen" class="resume-prompt__body">
-      <p>Продолжить чтение</p>
       <span>Часть {{ progress.partId }} · страница {{ progress.pageOrder }}</span>
       <RouterLink
         class="resume-prompt__link"
