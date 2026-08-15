@@ -17,6 +17,14 @@ function writeState(state) {
   }
 }
 
+export function clearReadingProgress() {
+  try {
+    window.localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // Private browsing and storage quotas should not interrupt reading.
+  }
+}
+
 export function saveReadingProgress(partId, pageOrder) {
   const state = readState()
   const previous = state.parts[partId]

@@ -6,11 +6,16 @@ import ReaderFooter from '../components/ReaderFooter.vue'
 import ReaderHeader from '../components/ReaderHeader.vue'
 import comic from '../data/comic.js'
 import { comicParts } from '../data/comicParts.js'
-import { completeReadingPart, saveReadingProgress } from '../utils/readingProgress.js'
+import {
+  completeReadingPart,
+  getLatestUnfinishedProgress,
+  saveReadingProgress,
+} from '../utils/readingProgress.js'
 
 const route = useRoute()
 const pageLoaded = reactive({})
 const comicStack = ref(null)
+const resumeProgress = ref(getLatestUnfinishedProgress())
 let progressObserver
 
 const part = computed(() => comicParts.find((item) => item.id === Number(route.params.id)))
@@ -27,6 +32,10 @@ function markLoadedIfComplete(element, order) {
   if (element?.complete && element.naturalWidth) markPageLoaded(order)
 }
 
+function refreshResumeProgress() {
+  resumeProgress.value = getLatestUnfinishedProgress()
+}
+
 function observeReadingProgress() {
   progressObserver?.disconnect()
   if (!comicStack.value || !part.value) return
@@ -41,6 +50,7 @@ function observeReadingProgress() {
         } else {
           saveReadingProgress(part.value.id, pageOrder)
         }
+        refreshResumeProgress()
       })
     },
     { threshold: [0.5] },
@@ -74,11 +84,19 @@ watch(
 )
 
 onBeforeUnmount(() => progressObserver?.disconnect())
+
+function clearResumeProgress() {
+  resumeProgress.value = undefined
+}
 </script>
 
 <template>
   <main v-if="part" class="reader-page">
-    <ReaderHeader :part-title="part.title" />
+    <ReaderHeader
+      :part-title="part.title"
+      :resume-progress="resumeProgress"
+      @progress-reset="clearResumeProgress"
+    />
 
     <section ref="comicStack" class="comic-stack" :aria-label="`${part.title}, страницы комикса`">
       <figure

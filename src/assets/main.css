@@ -469,6 +469,39 @@
   text-underline-offset: 4px;
 }
 
+.resume-prompt__forget,
+.reader-resume__forget {
+  width: fit-content;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.resume-prompt__forget:hover,
+.resume-prompt__forget:focus-visible,
+.reader-resume__forget:hover,
+.reader-resume__forget:focus-visible {
+  color: var(--text-bright);
+}
+
+.reader-resume {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 14px;
+  align-items: baseline;
+}
+
+.reader-resume__link {
+  color: var(--text-bright);
+  text-underline-offset: 4px;
+}
+
 @media (max-width: 760px) {
   .home-page {
     padding: 12px;
