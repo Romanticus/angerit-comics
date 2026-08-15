@@ -91,33 +91,29 @@ onBeforeUnmount(() => window.removeEventListener('scroll', updateVisibility))
     ref="header"
     class="reader-header"
     :class="{ 'reader-header--hidden': isHidden }"
+    @mouseenter="isPointerInside = true"
+    @mouseleave="isPointerInside = false"
   >
-    <div
-      class="reader-header__inner"
-      @mouseenter="isPointerInside = true"
-      @mouseleave="isPointerInside = false"
-    >
-      <RouterLink class="reader-home-link" to="/">← На главную</RouterLink>
-      <p class="reader-kicker">No, I'm not a Human</p>
-      <div v-if="resumeProgress" class="reader-resume">
-        <button
-          class="reader-resume__link"
-          type="button"
-          @click="handleResumeClick(resumeProgress)"
-        >
-          К странице {{ resumeProgress.pageOrder }}
-        </button>
-        <button class="reader-resume__forget" type="button" @click="forgetProgress">
-          Забыть прогресс
-        </button>
-      </div>
-      <h1>{{ partTitle }}</h1>
-      <div v-if="showResetConfirm" class="reader-reset-dialog" role="dialog" aria-modal="true" aria-labelledby="reset-progress-title">
-        <p id="reset-progress-title">Точно сбросить прогресс?</p>
-        <div class="reader-reset-dialog__actions">
-          <button class="reader-reset-dialog__yes" type="button" @click="confirmForgetProgress">Да</button>
-          <button class="reader-reset-dialog__no" type="button" @click="cancelForgetProgress">Нет</button>
-        </div>
+    <RouterLink class="reader-home-link" to="/">← На главную</RouterLink>
+    <p class="reader-kicker">No, I'm not a Human</p>
+    <div v-if="resumeProgress" class="reader-resume">
+      <button
+        class="reader-resume__link"
+        type="button"
+        @click="handleResumeClick(resumeProgress)"
+      >
+        К странице {{ resumeProgress.pageOrder }}
+      </button>
+      <button class="reader-resume__forget" type="button" @click="forgetProgress">
+        Забыть прогресс
+      </button>
+    </div>
+    <h1>{{ partTitle }}</h1>
+    <div v-if="showResetConfirm" class="reader-reset-dialog" role="dialog" aria-modal="true" aria-labelledby="reset-progress-title">
+      <p id="reset-progress-title">Точно сбросить прогресс?</p>
+      <div class="reader-reset-dialog__actions">
+        <button class="reader-reset-dialog__yes" type="button" @click="confirmForgetProgress">Да</button>
+        <button class="reader-reset-dialog__no" type="button" @click="cancelForgetProgress">Нет</button>
       </div>
     </div>
   </header>
