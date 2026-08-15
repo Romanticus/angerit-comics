@@ -404,11 +404,12 @@
 .resume-prompt {
   position: fixed;
   top: clamp(24px, 8vh, 72px);
-  right: 18px;
+  right: 0;
   z-index: 20;
   display: flex;
-  width: min(320px, calc(100vw - 24px));
-  min-height: 72px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  min-height: 58px;
   border: 1px solid var(--border);
   background: var(--background);
   transform: translateX(calc(100% - 44px));
@@ -421,10 +422,10 @@
 
 .resume-prompt__toggle {
   flex: 0 0 42px;
-  border: 0;
+  border: 1px solid var(--text);
   border-right: 1px solid var(--border-muted);
-  background: transparent;
-  color: var(--text-bright);
+  background: var(--text);
+  color: var(--background);
   cursor: pointer;
   font: inherit;
   font-size: 1.2rem;
@@ -438,14 +439,20 @@
 
 .resume-prompt__body {
   display: grid;
-  flex: 1;
+  width: max-content;
+  max-width: calc(100vw - 68px);
   gap: 4px;
   align-content: center;
   min-width: 0;
-  padding: 10px 14px;
+  padding: 6px 10px;
   color: var(--text-muted);
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   line-height: 1.3;
+}
+
+.resume-prompt__body > span,
+.resume-prompt__link {
+  white-space: nowrap;
 }
 
 .resume-prompt__link {
@@ -526,7 +533,7 @@
   }
 
   .resume-prompt--open {
-    right: 12px;
+    right: 0;
   }
 
   .reader-header .reader-kicker {
