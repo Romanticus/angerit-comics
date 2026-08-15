@@ -4,6 +4,12 @@
  */
 const modules = import.meta.glob('@/assets/images/*.*', { eager: true })
 
+const imageDimensions = {
+  '122.webp': { width: 4093, height: 2894 },
+  '126.webp': { width: 4093, height: 2894 },
+  '127.webp': { width: 4093, height: 2894 },
+}
+
 const pages = Object.entries(modules)
   .sort(([pathA], [pathB]) => {
     const nameA = pathA.split('/').pop() || pathA
@@ -13,9 +19,15 @@ const pages = Object.entries(modules)
     if (!Number.isNaN(numA) && !Number.isNaN(numB)) return numA - numB
     return nameA.localeCompare(nameB, undefined, { numeric: true })
   })
-  .map(([, mod], index) => ({
-    order: index + 1,
-    url: mod.default,
-  }))
+  .map(([path, mod], index) => {
+    const filename = path.split('/').pop() || path
+    const dimensions = imageDimensions[filename] || { width: 2894, height: 4093 }
+
+    return {
+      order: index + 1,
+      url: mod.default,
+      ...dimensions,
+    }
+  })
 
 export default pages
